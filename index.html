@@ -8,49 +8,69 @@
   </head>
   <body>
     <div class="container">
-    <form id="myForms">
-      <div class="grid_container">
-      <label for="">Tên: </label><br>
-      <input type="text" id="name" /><br />
+      <form id="myForms">
+        <div class="grid_container">
+          <label for="name">Tên: </label><br />
+          <input type="text" id="name" /><br />
+          <span class="error" id="nameError"></span><br />
 
-      <label for="age">Tuổi: </label><br>
-      <input type="number" id="age"  /><br />
+          <label for="age">Tuổi: </label><br />
+          <input type="number" id="age" /><br />
+          <span class="error" id="ageError"></span><br />
 
-      <label for="email">Email: </label><br>
-      <input type="email" id="email"  /><br />
+          <label for="email">Email: </label><br />
+          <input type="email" id="email" /><br />
+          <span class="error" id="emailError"></span><br />
 
-      <label for="phone">Số điện thoại: </label><br>
-      <input type="phone" id="phone"  /><br />
+          <label for="phone">Số điện thoại: </label><br />
+          <input type="phone" id="phone" /><br />
+          <span class="error" id="phoneError"></span><br />
+        </div>
+        <input class="button_submit" type="submit" />
+      </form>
+      <div class="result" id="result"></div>
     </div>
-      <input class="button_submit" type="submit">
-    </form>
-    <div class="result" id="result"></div>
-  </div>
+
     <script>
       document
         .getElementById("myForms")
         .addEventListener("submit", function (event) {
           event.preventDefault();
+          
           var name = document.getElementById("name").value.trim();
           var age = document.getElementById("age").value.trim();
           var email = document.getElementById("email").value.trim();
           var phone = document.getElementById("phone").value.trim();
+
+          // Xóa các thông báo lỗi trước đó
+          document.getElementById("nameError").textContent = "";
+          document.getElementById("ageError").textContent = "";
+          document.getElementById("emailError").textContent = "";
+          document.getElementById("phoneError").textContent = "";
+
           const errors = [];
-          if (!validateName(name)) errors.push("Tên không hợp lệ");
-          if (!validateAge(age)) errors.push("Tuổi không hợp lệ.");
-          if (!validateEmail(email)) errors.push("Email không hợp lệ.");
-          if (!validatePhone(phone)) errors.push("Số điện thoại không hợp lệ.");
-          const resultDiv = document.getElementById("result");
-          resultDiv.innerHTML = "";
+
+          if (!validateName(name)) {
+            errors.push("Tên không hợp lệ");
+            document.getElementById("nameError").textContent = "Tên không hợp lệ.";
+          }
+          if (!validateAge(age)) {
+            errors.push("Tuổi không hợp lệ");
+            document.getElementById("ageError").textContent = "Tuổi phải từ 18 đến 99.";
+          }
+          if (!validateEmail(email)) {
+            errors.push("Email không hợp lệ");
+            document.getElementById("emailError").textContent = "Email không hợp lệ.";
+          }
+          if (!validatePhone(phone)) {
+            errors.push("Số điện thoại không hợp lệ");
+            document.getElementById("phoneError").textContent = "Số điện thoại không hợp lệ.";
+          }
+
           if (errors.length > 0) {
-            errors.forEach((error) => {
-              const paragraph = document.createElement("paragraph");
-              paragraph.className = "error";
-              paragraph.textContent = error;
-              resultDiv.appendChild(paragraph);
-            });
             return;
           }
+
           document.getElementById("result").innerHTML =
             "Thông tin đã nhập: <br> Tên: " +
             name +
@@ -60,20 +80,23 @@
             email +
             "<br> Số điện thoại: " +
             phone;
-          console.log(name, age, email, phone);
         });
+
       function validateName(name) {
         const regexName = /^[a-zA-Z\s]+$/;
         return regexName.test(name);
       }
+
       function validateEmail(email) {
         const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regexEmail.test(email);
       }
+
       function validatePhone(phone) {
         const regexPhone = /^\d{10,15}$/;
         return regexPhone.test(phone);
       }
+
       function validateAge(age) {
         return age >= 18 && age <= 99;
       }
