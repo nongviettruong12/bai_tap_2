@@ -7,22 +7,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="container">
     <form id="myForms">
-      <label for="">Tên: </label>
+      <div class="grid_container">
+      <label for="">Tên: </label><br>
       <input type="text" id="name" /><br />
 
-      <label for="age">Tuổi: </label>
+      <label for="age">Tuổi: </label><br>
       <input type="number" id="age"  /><br />
 
-      <label for="email">Email: </label>
+      <label for="email">Email: </label><br>
       <input type="email" id="email"  /><br />
 
-      <label for="phone">Số điện thoại: </label>
+      <label for="phone">Số điện thoại: </label><br>
       <input type="phone" id="phone"  /><br />
-
-      <button type="submit">submit</button>
+    </div>
+      <input class="button_submit" type="submit">
     </form>
     <div class="result" id="result"></div>
+  </div>
     <script>
       document
         .getElementById("myForms")
@@ -33,8 +36,8 @@
           var email = document.getElementById("email").value.trim();
           var phone = document.getElementById("phone").value.trim();
           const errors = [];
-          if (!validateName(name)) errors.push("tên không hợp lệ");
-          if (!validateAge(age)) errors.push("tuổi không hợp lệ.");
+          if (!validateName(name)) errors.push("Tên không hợp lệ");
+          if (!validateAge(age)) errors.push("Tuổi không hợp lệ.");
           if (!validateEmail(email)) errors.push("Email không hợp lệ.");
           if (!validatePhone(phone)) errors.push("Số điện thoại không hợp lệ.");
           const resultDiv = document.getElementById("result");
@@ -60,16 +63,16 @@
           console.log(name, age, email, phone);
         });
       function validateName(name) {
-        const regex = /^[a-zA-Z\s]+$/;
-        return regex.test(name);
+        const regexName = /^[a-zA-Z\s]+$/;
+        return regexName.test(name);
       }
       function validateEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regexEmail.test(email);
       }
       function validatePhone(phone) {
-        const regex = /^\d{10,15}$/;
-        return regex.test(phone);
+        const regexPhone = /^\d{10,15}$/;
+        return regexPhone.test(phone);
       }
       function validateAge(age) {
         return age >= 18 && age <= 99;
