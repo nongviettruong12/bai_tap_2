@@ -37,16 +37,15 @@
         .addEventListener("submit", function (event) {
           event.preventDefault();
           
-          var name = document.getElementById("name").value.trim();
-          var age = document.getElementById("age").value.trim();
-          var email = document.getElementById("email").value.trim();
-          var phone = document.getElementById("phone").value.trim();
+          const nameValue = document.getElementById("name").value
+          const ageValue = document.getElementById("age").value
+          const emailValue = document.getElementById("email").value
+          const phoneValue = document.getElementById("phone").value
 
-          // Xóa các thông báo lỗi trước đó
-          document.getElementById("nameError").textContent = "";
-          document.getElementById("ageError").textContent = "";
-          document.getElementById("emailError").textContent = "";
-          document.getElementById("phoneError").textContent = "";
+          const nameErrTextContent = document.getElementById("nameError").textContent = "";
+          const ageErrTextContent =document.getElementById("ageError").textContent = "";
+          const emailErrTextContent =document.getElementById("emailError").textContent = "";
+          const phoneErrTextContent =document.getElementById("phoneError").textContent = "";
 
           const errors = [];
 
